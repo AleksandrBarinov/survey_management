@@ -1,5 +1,6 @@
 package ru.home.test.survey_management.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Question extends BaseEntity{
     @OneToOne
     private Survey survey;

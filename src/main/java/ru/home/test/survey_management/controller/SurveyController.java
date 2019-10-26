@@ -22,7 +22,7 @@ public class SurveyController {
     }
 
     @GetMapping("{id}")
-    public Survey getSurvey(@PathVariable Long id) {
+    public Survey getSurvey(@PathVariable("id") Long id) {
         return surveyService.getById(id);
     }
 
@@ -36,7 +36,7 @@ public class SurveyController {
         return surveyService.editSurvey(survey);
     }
 
-    @DeleteMapping
+    @DeleteMapping("{id}")
     public void deleteSurvey(@PathVariable Long id) {
         surveyService.deleteSurvey(id);
     }
