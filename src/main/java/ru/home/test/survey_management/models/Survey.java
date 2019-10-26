@@ -5,10 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "surveys")
@@ -21,4 +21,6 @@ public class Survey extends BaseEntity{
     private Date dateStart;
     private Date dateEnd;
     private boolean isActive;
+    @ManyToMany(cascade = CascadeType.ALL)
+    List<Question> questions;
 }
