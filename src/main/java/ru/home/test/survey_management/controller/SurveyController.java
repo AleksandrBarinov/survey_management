@@ -17,8 +17,8 @@ public class SurveyController {
     }
 
     @GetMapping
-    public List<Survey> getAllSurveys(@RequestParam String sort_by) {
-        return surveyService.getAllSurveys(sort_by);
+    public List<Survey> getAllSurveys(@RequestParam String sort_by, @RequestParam int page_num) {
+        return surveyService.getAllSurveys(sort_by, page_num);
     }
 
     @GetMapping("{id}")

@@ -1,12 +1,13 @@
 package ru.home.test.survey_management.services;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import ru.home.test.survey_management.models.Survey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.home.test.survey_management.repository.SurveyRepository;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class SurveyServiceImpl implements SurveyService {
@@ -42,14 +43,20 @@ public class SurveyServiceImpl implements SurveyService {
     }
 
     @Override
-    public List<Survey> getAllSurveys(String sortBy) {
-        List<Survey> surveys = surveyRepository.findAll();
+    public List<Survey> getAllSurveys(String sortBy, int page_num) {
+        Pageable pageable = PageRequest.of(page_num + 1,4);
+
+        List<Survey> surveysPage = new ArrayList<>(
+                surveyRepository.findAll(pageable).toList()
+        );
         switch (sortBy){
             case "name":
-                surveys.sort(Comparator.comparing(Survey::getName));
+                surveysPage.sort(Comparator.comparing(Survey::getName));
+                break;
             case "date_start":
-                surveys.sort(Comparator.comparing(Survey::getDateStart));
+                surveysPage.sort(Comparator.comparing(Survey::getDateStart));
+                break;
         }
-        return surveys;
+        return surveysPage;
     }
 }

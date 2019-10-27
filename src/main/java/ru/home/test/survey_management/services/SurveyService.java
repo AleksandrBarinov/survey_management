@@ -14,5 +14,5 @@ public interface SurveyService {
 
     void deleteSurvey(Long id);
 
-    List<Survey> getAllSurveys(String sortBy);
+    List<Survey> getAllSurveys(String sortBy, int page_num);
 }
