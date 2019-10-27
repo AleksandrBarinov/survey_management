@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.home.test.survey_management.repository.SurveyRepository;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -41,7 +42,14 @@ public class SurveyServiceImpl implements SurveyService {
     }
 
     @Override
-    public List<Survey> getAllsurveys() {
-        return surveyRepository.findAll();
+    public List<Survey> getAllSurveys(String sortBy) {
+        List<Survey> surveys = surveyRepository.findAll();
+        switch (sortBy){
+            case "name":
+                surveys.sort(Comparator.comparing(Survey::getName));
+            case "date_start":
+                surveys.sort(Comparator.comparing(Survey::getDateStart));
+        }
+        return surveys;
     }
 }
