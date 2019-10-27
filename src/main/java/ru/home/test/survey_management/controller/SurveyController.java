@@ -4,6 +4,7 @@ import ru.home.test.survey_management.models.Survey;
 import org.springframework.web.bind.annotation.*;
 import ru.home.test.survey_management.services.SurveyService;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -17,8 +18,13 @@ public class SurveyController {
     }
 
     @GetMapping
-    public List<Survey> getAllSurveys(@RequestParam String sort_by, @RequestParam int page_num) {
-        return surveyService.getAllSurveys(sort_by, page_num);
+    public List<Survey> getAllSurveys(
+            @RequestParam String sort_by,
+            @RequestParam int page_num,
+            @RequestParam(required = false) String filter,
+            @RequestParam(required = false) String filterValue
+    ) throws ParseException {
+        return surveyService.getAllSurveys(sort_by, page_num, filter, filterValue);
     }
 
     @GetMapping("{id}")

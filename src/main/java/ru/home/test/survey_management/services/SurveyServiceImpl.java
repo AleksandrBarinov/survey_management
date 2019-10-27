@@ -2,12 +2,16 @@ package ru.home.test.survey_management.services;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import ru.home.test.survey_management.models.Survey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.home.test.survey_management.repository.SurveyRepository;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SurveyServiceImpl implements SurveyService {
@@ -43,19 +47,33 @@ public class SurveyServiceImpl implements SurveyService {
     }
 
     @Override
-    public List<Survey> getAllSurveys(String sortBy, int page_num) {
-        Pageable pageable = PageRequest.of(page_num + 1,4);
+    public List<Survey> getAllSurveys(String sortBy, int page_num, String filter, String filterValue) throws ParseException {
 
-        List<Survey> surveysPage = new ArrayList<>(
-                surveyRepository.findAll(pageable).toList()
-        );
-        switch (sortBy){
-            case "name":
-                surveysPage.sort(Comparator.comparing(Survey::getName));
-                break;
-            case "date_start":
-                surveysPage.sort(Comparator.comparing(Survey::getDateStart));
-                break;
+        Pageable pageable = PageRequest.of(page_num - 1,4, Sort.by(sortBy));
+
+        List<Survey> surveysPage = surveyRepository.findAll(pageable).toList();
+
+        if (filter != null && filterValue != null) {
+            switch (filter) {
+                case "name":
+                    surveysPage = surveysPage.stream()
+                            .filter(survey -> survey.getName().equals(filterValue))
+                            .collect(Collectors.toList());
+                    break;
+
+                case "dateStart":
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    surveysPage = surveysPage.stream().filter(survey ->
+                            dateFormat.format(survey.getDateStart()).equals(filterValue))
+                            .collect(Collectors.toList());
+                    break;
+
+                case "isActive":
+                    surveysPage = surveysPage.stream()
+                            .filter(survey -> survey.isActive() == Boolean.valueOf(filterValue))
+                            .collect(Collectors.toList());
+                    break;
+            }
         }
         return surveysPage;
     }
