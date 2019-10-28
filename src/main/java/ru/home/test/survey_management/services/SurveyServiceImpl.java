@@ -62,7 +62,7 @@ public class SurveyServiceImpl implements SurveyService {
         if (dateStart != null){
             Date date = null;
             try {
-                date = new SimpleDateFormat("dd.MM.yyyy").parse(dateStart);
+                date = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss.SSS").parse(dateStart);
             } catch (ParseException ignored){}
             specification.addFilter(
                     new Filter("dateStart", date)
@@ -76,7 +76,7 @@ public class SurveyServiceImpl implements SurveyService {
             );
         }
 
-        Pageable pageable = PageRequest.of(page_num - 1,4, Sort.by("id"));
+        Pageable pageable = PageRequest.of(page_num - 1,4, Sort.by(sortBy));
 
         List<Survey> surveysPage = surveyRepository.findAll(specification, pageable).toList();
 
