@@ -39,6 +39,7 @@ public class SurveyServiceImpl implements SurveyService {
         surveyDB.setDateStart(survey.getDateStart());
         surveyDB.setDateEnd(survey.getDateEnd());
         surveyDB.setActive(survey.isActive());
+        surveyDB.setQuestions(survey.getQuestions());
 
         return saveSurvey(surveyDB);
     }
