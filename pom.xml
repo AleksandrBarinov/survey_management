@@ -11,7 +11,7 @@
     <groupId>ru.home.test</groupId>
     <artifactId>survey_management</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>survey_management</name>
+    <field>survey_management</field>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -55,7 +55,6 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.5</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -64,6 +63,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+
         </plugins>
     </build>
 

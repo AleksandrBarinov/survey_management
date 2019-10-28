@@ -21,10 +21,11 @@ public class SurveyController {
     public List<Survey> getAllSurveys(
             @RequestParam String sort_by,
             @RequestParam int page_num,
-            @RequestParam(required = false) String filter,
-            @RequestParam(required = false) String filterValue
-    ) throws ParseException {
-        return surveyService.getAllSurveys(sort_by, page_num, filter, filterValue);
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String dateStart,
+            @RequestParam(required = false) String isActive
+    ){
+        return surveyService.getAllSurveys(sort_by, page_num, name, dateStart, isActive);
     }
 
     @GetMapping("{id}")

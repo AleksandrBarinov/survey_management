@@ -15,5 +15,5 @@ public interface SurveyService {
 
     void deleteSurvey(Long id);
 
-    List<Survey> getAllSurveys(String sortBy, int page_num, String filter, String filterValue) throws ParseException;
+    List<Survey> getAllSurveys(String sortBy, int page_num, String name, String dateStart, String isActive);
 }
