@@ -1,10 +1,9 @@
 package ru.home.test.survey_management.controller;
 
-import ru.home.test.survey_management.models.Survey;
 import org.springframework.web.bind.annotation.*;
+import ru.home.test.survey_management.models.Survey;
 import ru.home.test.survey_management.services.SurveyService;
 
-import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -23,7 +22,7 @@ public class SurveyController {
             @RequestParam int page_num,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String dateStart,
-            @RequestParam(required = false) String isActive
+            @RequestParam(required = false, defaultValue = "true") String isActive
     ){
         return surveyService.getAllSurveys(sort_by, page_num, name, dateStart, isActive);
     }
