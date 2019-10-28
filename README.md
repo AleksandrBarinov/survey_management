@@ -1,7 +1,7 @@
 # survey_management
 
 REST API на основе Spring Boot
-(Используемые технологии Java 8, Spring Boot, Hibernate, CriteriaBuilder, PostgreSQL, Liquibase)
+(Используемые технологии Java 8, Maven, Spring Boot, Hibernate, CriteriaBuilder, PostgreSQL, Liquibase)
 
 1) В командной стоке перейти в папку проекта выполнить команду:
 mvn install
